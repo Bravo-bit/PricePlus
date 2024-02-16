@@ -1,0 +1,94 @@
+.container {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr; /* Form on the left, two components on the right */
+  gap: 20px;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 100%; /* Set a maximum width */
+  background-color: #333; /* Background color for the container */
+  border-radius: 8px; /* Add border radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding shadow */
+}
+
+.left {
+  grid-column: 1 / span 1; /* Take first column */
+}
+
+.right {
+  grid-column: 2 / span 2; /* Take next two columns */
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 20px;
+}
+
+.card {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #222;
+  color: #fff;
+}
+
+h2 {
+  color: #f0ad4e;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #f0ad4e;
+  margin-left: 20px;
+}
+
+input {
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #444;
+  color: #fff;
+  font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding shadow */
+}
+
+button {
+  padding: 12px 24px;
+  background-color: #ae3ec9;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-start; /* Align button to the left */
+  font-size: 16px;
+  margin-left: 20px; /* Adding left margin */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding shadow */
+}
+
+button:hover {
+  background-color: #9631a8; /* Darker hover color */
+}
+
+p {
+  margin-top: 20px;
+}
+
+.predictedPriceContainer {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.predictedPriceContainer p {
+  margin-right: 10px; /* Add some spacing between the elements */
+}

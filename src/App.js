@@ -1,12 +1,37 @@
-import MainMenu from "./components/Layout/Menu/MainMenu";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+import ErrorPage from "./pages/Error";
+import HomePage from "./pages/Home";
+import RootLayout from "./pages/Root";
+import Search from "./pages/Search";
+import Favorites from "./pages/Favorites";
+import Authentication from "./pages/Authentication";
+import Prediction from "./pages/Prediction";
+import { action as logoutAction } from "./pages/Logout";
+
+import { checkAuthLoader, tokenLoader } from "./util/auth";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    id: "root",
+    loader: tokenLoader,
+    action: checkAuthLoader,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "search", element: <Search /> },
+      { path: "favorites", element: <Favorites /> },
+      { path: "auth", element: <Authentication /> },
+      { path: "predict", element: <Prediction /> },
+      { path: "logout", action: logoutAction },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <div>
-      <h1>Price Plus</h1>
-      <MainMenu />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

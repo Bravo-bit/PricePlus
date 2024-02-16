@@ -1,7 +1,11 @@
 import ComparisonGrid from "../components/Data/ComparisonGrid";
 
 function Home() {
-  return <ComparisonGrid />;
+  return (
+    <>
+      <ComparisonGrid />
+    </>
+  );
 }
 
 export default Home;
