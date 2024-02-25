@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./RealEstateForm.css";
 import Card from "../Layout/Card";
+import { DeleteFilled } from "@ant-design/icons";
 
 const RealEstateForm = () => {
   const maxClicks = 3;
@@ -14,9 +15,10 @@ const RealEstateForm = () => {
     "Property Type": "",
   });
 
-  const [firstCardInformation, setFirstCardInformation] = useState([]);
-  const [secondCardInformation, setSecondCardInformation] = useState([]);
-  const [predictedPrice, setPredictedPrice] = useState(0);
+  const [firstCardInformation, setFirstCardInformation] = useState({});
+  const [secondCardInformation, setSecondCardInformation] = useState({});
+  const [firstPredictedPrice, setFirstPredictedPrice] = useState(0);
+  const [secondPredictedPrice, setSecondPredictedPrice] = useState(0);
   const [clicksCount, setClicksCount] = useState(0);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
@@ -62,20 +64,36 @@ const RealEstateForm = () => {
       // Handle different click counts
       if (clicksCount === 0) {
         setFirstCardInformation(formData);
+        setFirstPredictedPrice(data.predicted_price);
       } else if (clicksCount === 1) {
         setSecondCardInformation(formData);
+        setSecondPredictedPrice(data.predicted_price);
       }
 
       // If the click count reaches the maximum allowed clicks, disable the button
       if (clicksCount >= maxClicks - 1) {
         setIsButtonDisabled(true);
-        console.log("the button is disabled")
+        console.log("The button is disabled");
       }
-
-      setPredictedPrice(data.predicted_price);
     } catch (error) {
       console.error("Error:", error.message);
     }
+  };
+
+  const handleDelete = () => {
+    // Clear card data and decrement clicks count
+    setFirstCardInformation({});
+    setSecondCardInformation({});
+    setFirstPredictedPrice(0);
+    setSecondPredictedPrice(0);
+    setClicksCount(Math.max(0, clicksCount - 1));
+  };
+
+  const handleCompare = () => {
+    // Save card data to localStorage
+    localStorage.setItem("compareData", JSON.stringify(firstCardInformation));
+    // Show alert
+    alert("Property has been added to compare page.");
   };
 
   return (
@@ -149,18 +167,52 @@ const RealEstateForm = () => {
 
       <div className="right">
         <Card>
-          {Object.entries(firstCardInformation).map(([key, value]) => (
-            <p key={key}>
-              <strong>{key}:</strong> {value}
+          <div className="card-content">
+            {Object.entries(firstCardInformation).map(([key, value]) => (
+              <p key={key}>
+                <strong>{key}:</strong> {value}
+              </p>
+            ))}
+
+            <p className="predictedPriceContainer">
+              £{Math.round(firstPredictedPrice)}
             </p>
-          ))}
+
+            <div className="actions-left">
+              <button onClick={handleCompare} disabled={isButtonDisabled}>
+                Compare +
+              </button>
+              <button>Favorites +</button>
+            </div>
+
+            <div className="delete-container-left">
+              <DeleteFilled className="delete" onClick={handleDelete} />
+            </div>
+          </div>
         </Card>
         <Card>
-          {Object.entries(secondCardInformation).map(([key, value]) => (
-            <p key={key}>
-              <strong>{key}:</strong> {value}
+          <div className="card-content">
+            {Object.entries(secondCardInformation).map(([key, value]) => (
+              <p key={key}>
+                <strong>{key}:</strong> {value}
+              </p>
+            ))}
+
+            <p className="predictedPriceContainer">
+              £{Math.round(secondPredictedPrice)}
             </p>
-          ))}
+
+            <div className="actions-right">
+              <button onClick={handleCompare} disabled={isButtonDisabled}>
+                Compare +
+              </button>
+              <button>Favorites +</button>
+            </div>
+
+            <div className="delete-container">
+              <DeleteFilled className="delete" onClick={handleDelete} />
+            </div>
+          </div>
         </Card>
       </div>
     </div>
