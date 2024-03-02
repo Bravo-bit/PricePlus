@@ -20,7 +20,7 @@
   padding: 40px; /* Increasing padding for better spacing */
   margin: 20px 0;
   border-radius: 12px; /* Making the border more rounded */
-  box-shadow: 0 4px 12px pink; /* Adding a subtle shadow */
+  box-shadow: 0 4px 12px #ff6b6b; /* Adding a subtle shadow */
 }
 
 .values {
