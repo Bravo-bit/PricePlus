@@ -1,8 +1,17 @@
 import { NavLink, useRouteLoaderData, Form } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
+import { checkStatus } from "../../util/auth";
+import { useNavigate } from "react-router-dom";
 
 const MainNavigation = () => {
+  
   const token = useRouteLoaderData("root");
+  const navigate = useNavigate();
+  const tokenStatus = checkStatus();
+
+  const handlePredictButtonClick = () => {
+    navigate("/predict");
+  };
 
   return (
     <>
@@ -41,6 +50,26 @@ const MainNavigation = () => {
                 Favorites
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive ? classes.active : undefined
+                }
+              >
+                About
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive ? classes.active : undefined
+                }
+              >
+                Contact
+              </NavLink>
+            </li>
             {!token && (
               <li>
                 <NavLink
@@ -53,6 +82,7 @@ const MainNavigation = () => {
                 </NavLink>
               </li>
             )}
+            {tokenStatus && <li onClick={handlePredictButtonClick}>Predict</li>}
             {token && (
               <li>
                 <Form action="/logout" method="post">

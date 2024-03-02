@@ -1,0 +1,20 @@
+.recharts-legend-item.active {
+  fill: #8884d8; /* Color for active (visible) legend items */
+}
+
+.recharts-legend-item.inactive {
+  fill: #ddd; /* Color for inactive (hidden) legend items */
+}
+
+.custom-tooltip {
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.custom-tooltip p {
+  margin: 0;
+  font-size: 12px;
+}

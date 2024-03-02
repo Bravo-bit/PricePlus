@@ -26,7 +26,7 @@ function Authentication() {
         const expiration = new Date();
         expiration.setHours(expiration.getHours() + 1);
         localStorage.setItem("expiration", expiration.toISOString());
-      } else if (mode === "signup") {
+      } else if (mode === "register") {
         await createUserWithEmailAndPassword(auth, email, password);
       }
       setIsAuthenticated(true);

@@ -71,10 +71,10 @@ function AuthForm({ onAuthentication, error }) {
       onAuthentication(
         formData.email,
         formData.password,
-        isLogin ? "login" : "signup"
+        isLogin ? "login" : "register"
       );
     } else {
-      console.log("Authentication Failed");
+      alert("Authentication Failed");
     }
   };
 
@@ -163,7 +163,7 @@ function AuthForm({ onAuthentication, error }) {
         )}
         <div className={classes.actions}>
           <Link
-            to={`?mode=${isLogin ? "signup" : "login"}`}
+            to={`?mode=${isLogin ? "register" : "login"}`}
             className={classes.customLink}
           >
             {isLogin ? "Create new user" : "Login"}

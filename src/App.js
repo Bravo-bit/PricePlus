@@ -6,6 +6,8 @@ import RootLayout from "./pages/Root";
 import Search from "./pages/Search";
 import Favorites from "./pages/Favorites";
 import Authentication from "./pages/Authentication";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
 import Prediction from "./pages/Prediction";
 import { action as logoutAction } from "./pages/Logout";
 
@@ -24,6 +26,8 @@ const router = createBrowserRouter([
       { path: "search", element: <Search /> },
       { path: "favorites", element: <Favorites /> },
       { path: "auth", element: <Authentication /> },
+      { path: "about", element: <About /> },
+      { path: "contact", element: <Contact /> },
       { path: "predict", element: <Prediction /> },
       { path: "logout", action: logoutAction },
     ],
