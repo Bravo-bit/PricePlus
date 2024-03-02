@@ -1,0 +1,53 @@
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+.header {
+  color: #ff6b6b; /* Redefining color to a more vibrant shade */
+  font-size: 2.5rem; /* Increasing font size for emphasis */
+  margin-bottom: 20px; /* Adding space below the header */
+}
+
+.subheader {
+  color: #333; /* Changing subheader color to a darker shade */
+  font-size: 1.8rem; /* Increasing font size for emphasis */
+}
+
+.aboutus {
+  background-color: transparent; /* Changing background to a light gray */
+  padding: 40px; /* Increasing padding for better spacing */
+  margin: 20px 0;
+  border-radius: 12px; /* Making the border more rounded */
+  box-shadow: 0 4px 12px pink; /* Adding a subtle shadow */
+}
+
+.values {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Using auto-fit for dynamic columns */
+  grid-gap: 40px; /* Increasing grid gap for better separation */
+  margin-top: 40px; /* Adding more space between values and header */
+}
+
+.valueitem {
+  background-color: #ffcccc; /* Changing background to a lighter shade of red */
+  color: #333; /* Changing text color to a darker shade */
+  padding: 20px; /* Increasing padding for better spacing */
+  border-radius: 12px; /* Making the border more rounded */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+}
+
+.valueitem h2 {
+  margin-top: 0;
+  margin-bottom: 10px; /* Adding space below the subheader */
+}
+
+@media (max-width: 768px) {
+  .values {
+    grid-template-columns: 1fr;
+  }
+}

@@ -5,6 +5,7 @@
   border: 1px solid pink;
   border-radius: 5px;
   background-color: transparent;
+  box-shadow: 0 4px 12px pink;
 }
 
 .form h1 {
