@@ -1,0 +1,48 @@
+.favorite-page {
+  padding: 20px;
+}
+
+.favorite-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.favorite-item {
+  margin-top: 3rem;
+  background-color: transparent;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px #ff6b6b;
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncy transition */
+}
+
+.favorite-item:hover {
+  transform: translateY(-55px);
+}
+
+.favorite-item-content {
+  padding: 20px;
+}
+
+.favorite-item h3 {
+  margin-bottom: 10px;
+  font-size: clamp(1rem, calc(1rem + 0.5vw), 1.5rem); /* Dynamic font size */
+}
+
+.favorite-item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.favorite-item p {
+  margin-bottom: 8px;
+}
+
+.favorite-item-price {
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.favorite-action-button {
+  margin-bottom: 30px;
+}

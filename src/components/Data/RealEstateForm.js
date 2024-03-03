@@ -21,6 +21,7 @@ const RealEstateForm = () => {
   ]);
 
   const [clicksCount, setClicksCount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,6 +33,7 @@ const RealEstateForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await fetch("predict", {
         method: "POST",
@@ -53,15 +55,34 @@ const RealEstateForm = () => {
       setClicksCount((prevCount) => prevCount + 1);
     } catch (error) {
       console.error("Error:", error.message);
+      // Show error message to the user
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const addToFavorites = (index) => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || {};
+    let nextIndex = 1;
+    while (storedFavorites[`property${nextIndex}`]) {
+      nextIndex++;
+    }
+    const key = `property${nextIndex}`;
+    const updatedFavorites = {
+      ...storedFavorites,
+      [key]: {
+        information: cardData[index].information,
+        predictedPrice: cardData[index].predictedPrice,
+      },
+    };
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    alert(`Property has been added to favorites.`);
   };
 
   const handleAction = (index, action) => {
     if (action === "compare") {
-      // Retrieve the existing compareData from localStorage or initialize as an empty object
       const storedCompareData =
         JSON.parse(localStorage.getItem("compareData")) || {};
-      // Add or update the property information in compareData
       const updatedCompareData = {
         ...storedCompareData,
         [`property${index + 1}`]: {
@@ -69,16 +90,10 @@ const RealEstateForm = () => {
           predictedPrice: cardData[index].predictedPrice,
         },
       };
-      // Store the updated compareData in localStorage
       localStorage.setItem("compareData", JSON.stringify(updatedCompareData));
       alert("Property has been added to compare page.");
     } else if (action === "favorite") {
-      // Implement favorite functionality
-      alert(
-        `Property ${
-          index === 0 ? "on the left" : "on the right"
-        } has been added to favorites.`
-      );
+      addToFavorites(index);
     } else if (action === "delete") {
       setCardData((prevCardData) => {
         const updatedData = [...prevCardData];
@@ -106,6 +121,7 @@ const RealEstateForm = () => {
           handleSubmit={handleSubmit}
           clicksCount={clicksCount}
           maxClicks={maxClicks}
+          loading={loading}
         />
       </div>
       <div className="right">
@@ -127,8 +143,11 @@ const RealEstateForm = () => {
                 >
                   Compare +
                 </button>
-                <button onClick={() => handleAction(index, "favorite")}>
-                  Favorites +
+                <button
+                  onClick={() => handleAction(index, "favorite")}
+                  disabled={clicksCount >= maxClicks}
+                >
+                  Add to Favorites
                 </button>
               </div>
               <div className="delete-container-left">

@@ -1,9 +1,9 @@
-import ComparisonGrid from "../components/Data/ComparisonGrid";
+import Comparison from "../components/Data/Comparison";
 
 function Home() {
   return (
     <>
-      <ComparisonGrid />
+      <Comparison />
     </>
   );
 }

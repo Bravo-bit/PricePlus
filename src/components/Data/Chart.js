@@ -42,7 +42,7 @@ function Chart({ compareData }) {
   });
 
   // Function to toggle visibility of a bar
-  const toggleVisibility = (dataKey) => {
+  const toggleVisibility = (dataKey, index, item) => {
     setVisibleBars((prevVisibleBars) => ({
       ...prevVisibleBars,
       [dataKey]: !prevVisibleBars[dataKey],
@@ -81,7 +81,7 @@ function Chart({ compareData }) {
         <Tooltip content={renderTooltipContent} />
         <Legend
           onClick={toggleVisibility}
-          wrapperStyle={{ color: "#333", fontSize: "12px" }}
+          wrapperStyle={{ color: "pink", fontSize: "12px" }}
         />
         {Object.entries(visibleBars).map(
           ([dataKey, isVisible], index) =>
@@ -89,15 +89,11 @@ function Chart({ compareData }) {
               <Bar
                 key={index}
                 dataKey={dataKey}
-                fill={
-                  dataKey === "Bedrooms" || dataKey === "Bathrooms"
-                    ? "#82ca9d"
-                    : "#8884d8"
-                }
+                fill={"pink"}
                 barSize={20}
                 stroke="#000"
                 strokeWidth={1}
-                activeBar={<Rectangle fill="pink" stroke="blue" />}
+                activeBar={<Rectangle fill="#ff6b6b" stroke="blue" />}
               />
             )
         )}
