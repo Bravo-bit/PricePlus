@@ -1,0 +1,35 @@
+/* PropertyCatalog.css */
+
+.property-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.property {
+  width: calc(100% / 8); /* Adjust width as needed */
+  margin: 0 10px 10px 0; /* Adjust margin as needed */
+  border: 1px solid pink; /* Add border */
+  padding: 10px; /* Add padding for spacing */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-item {
+  list-style: none;
+  margin: 0 5px;
+  display: inline;
+}
+
+.page-link {
+  text-decoration: none;
+  color: blue;
+  cursor: pointer;
+}
+
+.page-link:hover {
+  text-decoration: underline;
+}

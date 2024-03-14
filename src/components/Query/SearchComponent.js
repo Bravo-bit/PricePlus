@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SearchComponent.css";
 
-const SearchComponent = () => {
+const SearchComponent = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [recentSearches, setRecentSearches] = useState([]);
 
@@ -12,26 +12,35 @@ const SearchComponent = () => {
   const handleSearchSubmit = (event) => {
     event.preventDefault();
 
-    // Update recent searches
-    setRecentSearches((prevSearches) => [
-      searchTerm,
-      ...prevSearches.slice(0, 4),
-    ]);
+    // Check if the search term already exists in recent searches
+    const existingIndex = recentSearches.indexOf(searchTerm);
 
-    // Perform the filter action
-    performFilter(searchTerm);
+    if (existingIndex !== -1) {
+      // Remove existing occurrence of the search term
+      const updatedSearches = [...recentSearches];
+      updatedSearches.splice(existingIndex, 1);
+      setRecentSearches([searchTerm, ...updatedSearches.slice(0, 4)]);
+    } else {
+      // Add the search term to recent searches
+      setRecentSearches((prevSearches) => [
+        searchTerm,
+        ...prevSearches.slice(0, 4),
+      ]);
+    }
+
+    // Trigger onSearch callback with search term
+    onSearch(searchTerm);
   };
 
   const handleRecentSearchClick = (clickedTerm) => {
-    // Perform the filter action
-    performFilter(clickedTerm);
+    // Trigger onSearch callback with clicked term
+    onSearch(clickedTerm);
   };
 
-  const performFilter = (filterTerm) => {
-    // TODO: Define the action to be taken when a search (recent or new) is submitted or clicked
-    console.log("Performing filter with term:", filterTerm);
-    // You can add your filter logic or make an API call here
-  };
+  // Filter out blank recent searches
+  const filteredRecentSearches = recentSearches.filter(
+    (search) => search.trim() !== ""
+  );
 
   return (
     <div className="search-container">
@@ -48,7 +57,7 @@ const SearchComponent = () => {
       <div>
         <p>Recent Searches:</p>
         <ul>
-          {recentSearches.map((search, index) => (
+          {filteredRecentSearches.map((search, index) => (
             <li key={index} onClick={() => handleRecentSearchClick(search)}>
               {search}
             </li>

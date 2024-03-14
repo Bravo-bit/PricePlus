@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row, Col } from "antd";
 import Chart from "./Chart";
+import SaleAmountByTown from "../predictionCharts/SaleAmountByTown";
 
 const Comparison = () => {
   const [compareData, setCompareData] = useState({});
@@ -28,6 +29,7 @@ const Comparison = () => {
       <Card>
         <Chart compareData={compareData} />
       </Card>
+      <SaleAmountByTown></SaleAmountByTown>
     </div>
   );
 };
