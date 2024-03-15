@@ -26,10 +26,28 @@
 
 .page-link {
   text-decoration: none;
-  color: blue;
+  color: white;
   cursor: pointer;
 }
 
 .page-link:hover {
   text-decoration: underline;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.filters input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 150px;
+}
+
+.filters input:last-child {
+  margin-right: 0;
 }

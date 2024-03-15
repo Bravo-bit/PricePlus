@@ -10,8 +10,6 @@ const Search = () => {
     setSearchTerm(term);
   };
 
-  console.log(searchTerm)
-
   return (
     <>
       <SearchComponent onSearch={handleSearch} />

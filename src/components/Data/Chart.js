@@ -10,12 +10,12 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import "./Chart.css"; // Import CSS for styling
+import "./Chart.css";
 
 function Chart({ compareData }) {
   // Check if compareData is null or undefined
   if (!compareData || Object.keys(compareData).length === 0) {
-    // Return null or a message indicating that no data is available
+    // Return a message indicating that no data is available
     return <p>No data available</p>;
   }
 
@@ -49,6 +49,12 @@ function Chart({ compareData }) {
     }));
   };
 
+  // Function to clear data
+  const clearData = () => {
+    localStorage.removeItem("compareData");
+    window.location.reload();
+  };
+
   // Custom tooltip content
   const renderTooltipContent = (props) => {
     const { active, payload } = props;
@@ -65,40 +71,43 @@ function Chart({ compareData }) {
   };
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <BarChart
-        data={data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip content={renderTooltipContent} />
-        <Legend
-          onClick={toggleVisibility}
-          wrapperStyle={{ color: "pink", fontSize: "12px" }}
-        />
-        {Object.entries(visibleBars).map(
-          ([dataKey, isVisible], index) =>
-            isVisible && (
-              <Bar
-                key={index}
-                dataKey={dataKey}
-                fill={"pink"}
-                barSize={20}
-                stroke="#000"
-                strokeWidth={1}
-                activeBar={<Rectangle fill="#ff6b6b" stroke="blue" />}
-              />
-            )
-        )}
-      </BarChart>
-    </ResponsiveContainer>
+    <div>
+      <button onClick={clearData}>Clear Data</button>
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip content={renderTooltipContent} />
+          <Legend
+            onClick={toggleVisibility}
+            wrapperStyle={{ color: "pink", fontSize: "12px" }}
+          />
+          {Object.entries(visibleBars).map(
+            ([dataKey, isVisible], index) =>
+              isVisible && (
+                <Bar
+                  key={index}
+                  dataKey={dataKey}
+                  fill={"pink"}
+                  barSize={20}
+                  stroke="#000"
+                  strokeWidth={1}
+                  activeBar={<Rectangle fill="#ff6b6b" stroke="blue" />}
+                />
+              )
+          )}
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
 

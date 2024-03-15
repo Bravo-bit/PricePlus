@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, Row, Col } from "antd";
 import Chart from "./Chart";
 import SaleAmountByTown from "../predictionCharts/SaleAmountByTown";
+import Recommendations from "../predictionCharts/Recommendation"
 
 const Comparison = () => {
   const [compareData, setCompareData] = useState({});
@@ -28,6 +29,7 @@ const Comparison = () => {
       <h1>Comparison Chart</h1>
       <Card>
         <Chart compareData={compareData} />
+        <Recommendations />
       </Card>
       <SaleAmountByTown></SaleAmountByTown>
     </div>

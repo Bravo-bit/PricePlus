@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+ import React, { useState, useEffect } from "react";
 import "./RealEstateForm.css";
 import Card from "../Layout/Card";
 import { DeleteFilled } from "@ant-design/icons";
@@ -35,7 +35,7 @@ const RealEstateForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("predict", {
+      const response = await fetch("http://127.0.0.1:5000/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

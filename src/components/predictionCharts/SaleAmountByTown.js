@@ -20,7 +20,7 @@ const SaleAmountByTown = () => {
       const fetchPredictions = async () => {
         setLoading(true);
         try {
-          const response = await axios.get(`/home?town=${town}`);
+          const response = await axios.get(`http://127.0.0.1:5000/home?town=${town}`);
           // Round predicted_sale_amount in each prediction
           const roundedPredictions = response.data.map((prediction) => ({
             ...prediction,

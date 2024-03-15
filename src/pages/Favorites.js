@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import styles from "../components/styles/FavoritePage.module.css";
 
 const Favorites = () => {
-  const favorites = JSON.parse(localStorage.getItem("favorites")) || {};
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || {}
+  );
   const [compareData, setCompareData] = useState(
     JSON.parse(localStorage.getItem("compareData")) || {}
   );
@@ -16,8 +18,15 @@ const Favorites = () => {
           predictedPrice: favorites[key].predictedPrice,
         },
       };
+      setCompareData(updatedCompareData);
       localStorage.setItem("compareData", JSON.stringify(updatedCompareData));
       alert("Property has been added to compare page.");
+    } else if (action === "delete") {
+      const updatedFavorites = { ...favorites };
+      delete updatedFavorites[key];
+      setFavorites(updatedFavorites);
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      alert("Property has been removed from favorites.");
     }
   };
 
@@ -45,12 +54,20 @@ const Favorites = () => {
                   </p>
                 </div>
               </div>
-              <button
-                className={styles["favorite-action-button"]}
-                onClick={() => handleAction(key, "compare")}
-              >
-                Compare +
-              </button>
+              <div>
+                <button
+                  className={styles["favorite-action-button"]}
+                  onClick={() => handleAction(key, "compare")}
+                >
+                  Compare +
+                </button>
+                <button
+                  className={styles["favorite-action-button"]}
+                  onClick={() => handleAction(key, "delete")}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>

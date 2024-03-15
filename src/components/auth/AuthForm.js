@@ -73,25 +73,10 @@ function AuthForm({ onAuthentication, error }) {
         formData.password,
         isLogin ? "login" : "register"
       );
+      alert("Registration Successful")
     } else {
       alert("Authentication Failed");
     }
-  };
-
-  // Function to toggle password visibility
-  const togglePasswordVisibility = () => {
-    setFormData({
-      ...formData,
-      passwordVisible: !formData.passwordVisible,
-    });
-  };
-
-  // Function to toggle confirm password visibility
-  const toggleConfirmPasswordVisibility = () => {
-    setFormData({
-      ...formData,
-      confirmPasswordVisible: !formData.confirmPasswordVisible,
-    });
   };
 
   return (
