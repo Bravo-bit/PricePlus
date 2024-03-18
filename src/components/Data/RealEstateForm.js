@@ -1,4 +1,4 @@
- import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./RealEstateForm.css";
 import Card from "../Layout/Card";
 import { DeleteFilled } from "@ant-design/icons";
@@ -52,10 +52,16 @@ const RealEstateForm = () => {
         updatedData[clicksCount].predictedPrice = data.predicted_price;
         return updatedData;
       });
-      setClicksCount((prevCount) => prevCount + 1);
+      setClicksCount((prevCount) => {
+        const newCount = prevCount + 1;
+        if (newCount >= maxClicks) {
+          setSubmitDisabled(true);
+        }
+        return newCount;
+      });
     } catch (error) {
       console.error("Error:", error.message);
-      // Show error message to the user
+      alert("Submission Failed");
     } finally {
       setLoading(false);
     }

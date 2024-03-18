@@ -64,7 +64,7 @@ function AuthForm({ onAuthentication, error }) {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       // Call the onAuthentication callback with form data
@@ -73,11 +73,17 @@ function AuthForm({ onAuthentication, error }) {
         formData.password,
         isLogin ? "login" : "register"
       );
-      alert("Registration Successful")
     } else {
       alert("Authentication Failed");
     }
   };
+
+  useEffect(() => {
+    // Check if there is data and it contains a success message
+    if (data && data.message === "Authentication successful") {
+      alert("Authentication Successful");
+    }
+  }, [data]);
 
   return (
     <>
